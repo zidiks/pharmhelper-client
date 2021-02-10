@@ -13,7 +13,24 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="input-div">
-    <ion-input placeholder="Введите симптом"></ion-input>
-  </div>
+  <ion-slides #slider pager="false" [options]="slideOpts">
+    <ion-slide>
+      <div  class="slide-content">
+        <div class="input-div">
+          <ion-input autocorrect="true" style="text-align: start;" placeholder="Введите симптом"></ion-input>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-button (click)="swipeNext()" class="slide-next" color="primary">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
 </ion-content>

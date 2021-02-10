@@ -1,10 +1,21 @@
+.slide-content {
+    width: 100%;
+    padding: 0 1rem;
+    height: 100%;
+}
+
+.slide-next {
+    
+}
+
 .input-div {
     background-color: #60be5d;
     color: white;
     font-weight: 500;
     padding: 0 1rem;
-    margin: 0.5rem 1rem;
-    border-radius: 6px;
+    margin: 1rem auto;
+    width: 100%;
+    border-radius: 10px;
 }
 
 ion-toolbar {
@@ -13,4 +24,8 @@ ion-toolbar {
 
 ion-title {
     --color: #60be5d;
+}
+
+ion-slides {
+    height: calc(100% - 75px);
 }

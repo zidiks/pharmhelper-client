@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "pharmhelper-6d6dc"
+  },
+  "targets": {
+    "pharmhelper-6d6dc": {
+      "hosting": {
+        "app": [
+          "pharmhelper-6d6dc"
+        ]
+      }
+    }
   }
 }
