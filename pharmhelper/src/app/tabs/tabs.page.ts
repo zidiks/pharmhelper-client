@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { globalProps } from '../globalProps';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,25 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(
+    private firestore: AngularFirestore,
+  ) {
+    firestore.collection('symptoms').valueChanges().subscribe(data => {
+      if (data) {
+        data.forEach((el: any) => {
+          globalProps.allSymptoms.push({
+            name: el.name,
+            id: el.id
+          });
+          el.synonims.forEach(element => {
+            globalProps.allSymptoms.push({
+              name: element,
+              id: el.id
+            })
+          });
+        });
+      }
+    })
+  }
 
 }

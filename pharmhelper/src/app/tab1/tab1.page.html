@@ -17,7 +17,21 @@
     <ion-slide>
       <div  class="slide-content">
         <div class="input-div">
-          <ion-input autocorrect="true" style="text-align: start;" placeholder="Введите симптом"></ion-input>
+          <ion-input 
+            autocorrect="true" 
+            style="text-align: start; padding: 0 1rem !important; height: 3rem;" 
+            placeholder="Введите симптом"
+            [(ngModel)]="input"
+            (ionChange)="search()"
+            (ionFocus)="autocompleteFocus = true"
+            (ionBlur)="autocompleteFocus = false"
+            ></ion-input>
+          <div class="autocomplete" *ngIf="autocomplete.length > 0 && input.length > 0 && autocompleteFocus">
+            <span class="autocomplete-item" *ngFor="let item of autocomplete">{{ item.name }}</span>
+          </div>
+        </div>
+        <div class="slide-added">
+          ...
         </div>
       </div>
     </ion-slide>
@@ -29,7 +43,7 @@
     </ion-slide>
   </ion-slides>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-button (click)="swipeNext()" class="slide-next" color="primary">
+    <ion-button (click)="swipeNext()" color="primary">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-button>
   </ion-fab>
