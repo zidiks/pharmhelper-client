@@ -1,7 +1,5 @@
 {
   "name": "pharmhelper",
-  "integrations": {
-    "capacitor": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
