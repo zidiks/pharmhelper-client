@@ -1,0 +1,7 @@
+{
+  "name": "pharmhelper",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
