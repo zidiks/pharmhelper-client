@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import { from } from 'rxjs';
+import { ModalController } from '@ionic/angular';
 import { globalProps } from '../globalProps';
+import { ModalSubPage } from '../modal-sub/modal-sub.page'
 
 @Component({
   selector: 'app-tab1',
@@ -21,9 +22,22 @@ export class Tab1Page {
   autocompleteFocus = false;
   input = '';
   gP = globalProps;
-
+  modal: any;
   
-  constructor() {
+  constructor(
+    public modalController: ModalController
+  ) {
+  }
+
+  async presentModal(id: string) {
+    this.modal = await this.modalController.create({
+      component: ModalSubPage,
+      cssClass: 'my-custom-class',
+      componentProps: { 
+        data: this.gP.symptomsData.find(el => el.id == id)
+      }
+    });
+    return await this.modal.present();
   }
 
   swipeNext(){
@@ -31,7 +45,8 @@ export class Tab1Page {
   }
 
   search() {
-    this.autocomplete = this.gP.allSymptoms.filter(el => el.name.includes(this.input)).slice(0, 9);
+    this.autocomplete = this.gP.allSymptoms.filter(el => el.name.toLowerCase().includes(this.input.toLowerCase())).slice(0, 9);
+    console.log(this.gP.symptomsData);
   }
 
 }

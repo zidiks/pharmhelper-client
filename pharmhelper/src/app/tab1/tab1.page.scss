@@ -13,6 +13,16 @@
     border-radius: 10px;
     height: 3rem;
     z-index: 999;
+    .search-input {
+        text-align: start; 
+        height: 3rem;
+        --background: transparent;
+        padding: 0 0.5rem;
+        --color: white;
+        --icon-color: white;
+        --clear-button-color: white;
+        --cancel-button-color: white;
+    }
     .autocomplete {
         position: relative;
         top: -1rem;
@@ -26,7 +36,7 @@
         .autocomplete-item {
             width: 100%;
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             padding: 0.6rem 1rem;
             transition: .4s;
             text-align: start;

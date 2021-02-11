@@ -17,17 +17,17 @@
     <ion-slide>
       <div  class="slide-content">
         <div class="input-div">
-          <ion-input 
+          <ion-searchbar
             autocorrect="true" 
-            style="text-align: start; padding: 0 1rem !important; height: 3rem;" 
+            class="search-input"
             placeholder="Введите симптом"
             [(ngModel)]="input"
             (ionChange)="search()"
             (ionFocus)="autocompleteFocus = true"
             (ionBlur)="autocompleteFocus = false"
-            ></ion-input>
-          <div class="autocomplete" *ngIf="autocomplete.length > 0 && input.length > 0 && autocompleteFocus">
-            <span class="autocomplete-item" *ngFor="let item of autocomplete">{{ item.name }}</span>
+            ></ion-searchbar>
+          <div class="autocomplete" *ngIf="autocomplete.length > 0 && input.length > 0">
+            <span class="autocomplete-item" (click)="presentModal(item.id)" *ngFor="let item of autocomplete">{{ item.name }}</span>
           </div>
         </div>
         <div class="slide-added">

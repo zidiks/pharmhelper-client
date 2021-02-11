@@ -14,6 +14,7 @@ export class TabsPage {
   ) {
     firestore.collection('symptoms').valueChanges().subscribe(data => {
       if (data) {
+        globalProps.symptomsData = data;
         data.forEach((el: any) => {
           globalProps.allSymptoms.push({
             name: el.name,
