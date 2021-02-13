@@ -20,7 +20,6 @@ export class Tab1Page {
   };
   autocomplete = [];
   autocompleteFocus = false;
-  input = '';
   gP = globalProps;
   modal: any;
   
@@ -34,7 +33,9 @@ export class Tab1Page {
       component: ModalSubPage,
       cssClass: 'my-custom-class',
       componentProps: { 
-        data: this.gP.symptomsData.find(el => el.id == id)
+        data: {
+          sympt: this.gP.symptomsData.find(el => el.id == id)
+        }
       }
     });
     return await this.modal.present();
@@ -44,9 +45,13 @@ export class Tab1Page {
     this.slides.slideNext();
   }
 
+  dellAdded(index: number, id: string) {
+    this.gP.addedSymptoms.splice(index, 1);
+    this.gP.addedIDs.delete(id);
+  }
+
   search() {
-    this.autocomplete = this.gP.allSymptoms.filter(el => el.name.toLowerCase().includes(this.input.toLowerCase())).slice(0, 9);
-    console.log(this.gP.symptomsData);
+    this.autocomplete = this.gP.allSymptoms.filter(el => el.name.toLowerCase().includes(this.gP.symptInput.toLowerCase()) && !this.gP.addedIDs.has(el.id)).slice(0, 9);
   }
 
 }

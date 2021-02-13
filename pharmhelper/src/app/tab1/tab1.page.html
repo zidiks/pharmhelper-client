@@ -21,17 +21,20 @@
             autocorrect="true" 
             class="search-input"
             placeholder="Введите симптом"
-            [(ngModel)]="input"
+            [(ngModel)]="gP.symptInput"
             (ionChange)="search()"
-            (ionFocus)="autocompleteFocus = true"
-            (ionBlur)="autocompleteFocus = false"
             ></ion-searchbar>
-          <div class="autocomplete" *ngIf="autocomplete.length > 0 && input.length > 0">
+          <div class="autocomplete" *ngIf="autocomplete.length > 0 && gP.symptInput.length > 0">
             <span class="autocomplete-item" (click)="presentModal(item.id)" *ngFor="let item of autocomplete">{{ item.name }}</span>
           </div>
         </div>
         <div class="slide-added">
-          ...
+          <ion-list>
+            <ion-item *ngFor="let sub of gP.addedSymptoms; index as i;">
+              <ion-icon slot="end" (click)="dellAdded(i, sub.parentID)" class="sub-trash" name="trash-outline"></ion-icon>
+              <ion-label>{{ sub.sub.name }}</ion-label>
+            </ion-item>
+          </ion-list>
         </div>
       </div>
     </ion-slide>
