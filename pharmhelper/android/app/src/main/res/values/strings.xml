@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PharmHelper</string>
+    <string name="title_activity_main">PharmHelper</string>
+    <string name="package_name">com.pharmhelper.app</string>
+    <string name="custom_url_scheme">com.pharmhelper.app</string>
+</resources>
