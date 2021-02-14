@@ -39,14 +39,19 @@
       </div>
     </ion-slide>
     <ion-slide>
-      <h1>Slide 2</h1>
+      <h2>{{ gP.disResult ? gP.disResult : 'Соответствий не найдено...' }}</h2>
     </ion-slide>
     <ion-slide>
       <h1>Slide 3</h1>
     </ion-slide>
   </ion-slides>
+  <ion-fab *ngIf="gP.activeSlide > 0" horizontal="start" vertical="bottom" slot="fixed">
+    <ion-button (click)="swipePrev()" color="primary">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </ion-fab>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-button (click)="swipeNext()" color="primary">
+    <ion-button [disabled]="gP.addedSymptoms.length < 1" (click)="swipeNext()" color="primary">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-button>
   </ion-fab>

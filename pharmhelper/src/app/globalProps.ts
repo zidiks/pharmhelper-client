@@ -3,7 +3,11 @@ export interface globalProps {
     allSymptoms: Array<any>,
     addedSymptoms: Array<any>,
     addedIDs: Set<string>,
-    symptInput: string
+    symptInput: string,
+    activeSlide: number,
+    disResult: any,
+    disData: any,
+    disPrev: Array<any>
 }
 
 export const globalProps: globalProps = {
@@ -11,5 +15,9 @@ export const globalProps: globalProps = {
     allSymptoms: [],
     addedSymptoms: [],
     addedIDs: new Set(),
-    symptInput: ''
+    symptInput: '',
+    activeSlide: 0,
+    disResult: undefined,
+    disData: undefined,
+    disPrev: []
 }

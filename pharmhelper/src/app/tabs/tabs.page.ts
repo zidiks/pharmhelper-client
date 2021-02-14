@@ -29,10 +29,25 @@ export class TabsPage implements OnInit{
               id: el.id
             })
           });
-          if (data.length - 1 === index) this.loading.dismiss();
+          if (data.length - 1 === index) {
+            const observer = setInterval(() => {
+              if (this.loading) {
+                clearInterval(observer);
+                setTimeout(() => {
+                  this.loading.dismiss();
+                }, 1000);
+              }
+            }, 100)
+          }
         });
       }
-    })
+    });
+
+    firestore.collection('diseases').valueChanges().subscribe(data => {
+      if (data) {
+        globalProps.disData = data;
+      }
+    });
   }
 
   ngOnInit() {
@@ -47,8 +62,7 @@ export class TabsPage implements OnInit{
     });
     await this.loading.present();
 
-    const { role, data } = await this.loading.onDidDismiss();
-    console.log('Loading dismissed!');
+    // const { role, data } = await this.loading.onDidDismiss();
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { AlertController, IonSlides } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { globalProps } from '../globalProps';
 import { ModalSubPage } from '../modal-sub/modal-sub.page'
@@ -24,6 +24,7 @@ export class Tab1Page {
   modal: any;
   
   constructor(
+    public alertController: AlertController,
     public modalController: ModalController
   ) {
   }
@@ -43,11 +44,61 @@ export class Tab1Page {
 
   swipeNext(){
     this.slides.slideNext();
+    this.slides.getActiveIndex().then(res => {
+      globalProps.activeSlide = res;
+      if (res === 1) {
+        this.analysSymptoms();
+      }
+    });
+  }
+
+  swipePrev(){
+    this.slides.slidePrev();
+    this.slides.getActiveIndex().then(res => {
+      globalProps.activeSlide = res;
+    });
   }
 
   dellAdded(index: number, id: string) {
     this.gP.addedSymptoms.splice(index, 1);
     this.gP.addedIDs.delete(id);
+  }
+
+  analysSymptoms() {
+    globalProps.disPrev = [];
+    let warning = false;
+    console.log('start analys...');
+    const added = globalProps.addedSymptoms.map(el => el.sub.id);
+    globalProps.disData.forEach(dis => {
+      let count = 0;
+      dis.symptoms.forEach(sympt => {
+        if (added.includes(sympt.id)) {
+          count += sympt.k;
+          if  (!warning && sympt.warning) warning = true; 
+        }
+      });
+      if (count > 0) globalProps.disPrev.push(Object.assign({count: count}, dis));
+    });
+    globalProps.disPrev.sort((a,b) => a.count - b.count);
+    console.log(globalProps.disPrev);
+    globalProps.disResult = globalProps.disPrev.length > 0 ? !warning ? globalProps.disPrev[0].name : ' ' : 'Нет результатов';
+    if (warning) this.presentWarning();
+  }
+
+  async presentWarning() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Внимание!',
+      message: 'Вам необходимо обратиться к врачу',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.swipePrev();
+        }
+      }]
+    });
+
+    await alert.present();
   }
 
   search() {
