@@ -66,6 +66,7 @@ export class Tab1Page {
 
   analysSymptoms() {
     globalProps.disPrev = [];
+    globalProps.questionSympts = [];
     let warning = false;
     console.log('start analys...');
     const added = globalProps.addedSymptoms.map(el => el.sub.id);
@@ -77,11 +78,15 @@ export class Tab1Page {
           if  (!warning && sympt.warning) warning = true; 
         }
       });
-      if (count > 0) globalProps.disPrev.push(Object.assign({count: count}, dis));
+      if (count > 0) {
+        globalProps.disPrev.push(Object.assign({count: count}, dis));
+        globalProps.questionSympts = globalProps.questionSympts.concat(dis.symptoms.filter(m => !added.includes(m.id)).map(e => Object.assign({state: false, disIndex: globalProps.disPrev.length - 1}, e)));
+      };
     });
     globalProps.disPrev.sort((a,b) => a.count - b.count);
-    console.log(globalProps.disPrev);
-    globalProps.disResult = globalProps.disPrev.length > 0 ? !warning ? globalProps.disPrev[0].name : ' ' : 'Нет результатов';
+    console.log('q: ',globalProps.questionSympts);
+    console.log('p: ',globalProps.disPrev);
+    //globalProps.disResult = globalProps.disPrev.length > 0 ? !warning ? globalProps.disPrev[0].name : ' ' : 'Нет результатов';
     if (warning) this.presentWarning();
   }
 

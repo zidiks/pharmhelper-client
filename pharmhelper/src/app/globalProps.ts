@@ -7,7 +7,8 @@ export interface globalProps {
     activeSlide: number,
     disResult: any,
     disData: any,
-    disPrev: Array<any>
+    disPrev: Array<any>,
+    questionSympts: Array<any>
 }
 
 export const globalProps: globalProps = {
@@ -19,5 +20,6 @@ export const globalProps: globalProps = {
     activeSlide: 0,
     disResult: undefined,
     disData: undefined,
-    disPrev: []
+    disPrev: [],
+    questionSympts: []
 }

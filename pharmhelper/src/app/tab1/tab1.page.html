@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scroll-y="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">PharmHelper</ion-title>
@@ -39,7 +39,16 @@
       </div>
     </ion-slide>
     <ion-slide>
-      <h2>{{ gP.disResult ? gP.disResult : 'Соответствий не найдено...' }}</h2>
+      <div class="questions-content">
+        <h3>Беспокоят ли Вас следующие симптомы?</h3>
+      <ion-card *ngFor="let item of gP.questionSympts">
+        <ion-card-header>
+          <ion-card-subtitle>{{ item.name }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>{{ item.description }}</ion-card-content>
+        <ion-checkbox [(ngModel)]="item.state" color="primary"></ion-checkbox> 
+      </ion-card>
+      </div>
     </ion-slide>
     <ion-slide>
       <h1>Slide 3</h1>
