@@ -49,6 +49,9 @@ export class Tab1Page {
       if (res === 1) {
         this.analysSymptoms();
       }
+      if (res === 2) {
+        this.analysQuestions();
+      }
     });
   }
 
@@ -86,8 +89,16 @@ export class Tab1Page {
     globalProps.disPrev.sort((a,b) => a.count - b.count);
     console.log('q: ',globalProps.questionSympts);
     console.log('p: ',globalProps.disPrev);
-    //globalProps.disResult = globalProps.disPrev.length > 0 ? !warning ? globalProps.disPrev[0].name : ' ' : 'Нет результатов';
     if (warning) this.presentWarning();
+  }
+
+  analysQuestions() {
+    globalProps.questionSympts.forEach(el => {
+      if (el.state) {
+        globalProps.disPrev[el.disIndex].count += el.k;
+      }
+    });
+    globalProps.disResult = globalProps.disPrev.length > 0 ? globalProps.disPrev[0].name : 'Нет результатов';
   }
 
   async presentWarning() {
