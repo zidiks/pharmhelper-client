@@ -8,7 +8,8 @@ export interface globalProps {
     disResult: any,
     disData: any,
     disPrev: Array<any>,
-    questionSympts: Array<any>
+    questionSympts: Array<any>,
+    drugsData: Array<any>
 }
 
 export const globalProps: globalProps = {
@@ -21,5 +22,6 @@ export const globalProps: globalProps = {
     disResult: undefined,
     disData: undefined,
     disPrev: [],
-    questionSympts: []
+    questionSympts: [],
+    drugsData: []
 }

@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content fullscreen>
   <h3 class="sympt-title">{{ data.sympt.name }}</h3>
-  <ion-card *ngFor="let item of data.sympt.sub" (click)="addSub(item)">
+  <ion-card *ngFor="let item of symptSubsData" (click)="addSub(item)">
     <ion-card-header>
       <ion-card-subtitle>{{ item.name }}</ion-card-subtitle>
     </ion-card-header>

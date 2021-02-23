@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { ModalSubPage } from '../modal-sub/modal-sub.page';
+import { ModalDrugComponent } from '../modal-drug/modal-drug.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ModalSubPage } from '../modal-sub/modal-sub.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [TabsPage, ModalSubPage]
+  declarations: [TabsPage, ModalSubPage, ModalDrugComponent]
 })
 export class TabsPageModule {}

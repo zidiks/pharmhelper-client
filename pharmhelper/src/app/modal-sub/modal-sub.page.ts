@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { globalProps } from '../globalProps';
 import { ToastController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-modal-sub',
@@ -9,14 +10,23 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./modal-sub.page.scss'],
 })
 export class ModalSubPage implements OnInit {
-  
+
+  symptSubsData: any;
+
   @Input() public data: any;
   constructor(
     public toastController: ToastController,
-    private modalCtrl: ModalController
-  ) { }
+    private modalCtrl: ModalController,
+    private afs: AngularFirestore
+  ) {
+  }
 
   ngOnInit() {
+    this.afs.doc<any>(`symptoms/${this.data.sympt.id}`).valueChanges().subscribe(data => {
+      if (data) {
+        this.symptSubsData = data.sub;
+      }
+    });
   }
 
   async presentToast() {

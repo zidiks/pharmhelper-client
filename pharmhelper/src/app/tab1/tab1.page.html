@@ -51,7 +51,24 @@
       </div>
     </ion-slide>
     <ion-slide>
-      <h1>{{ gP.disResult }}</h1>
+      <div class="algoritm questions-content" *ngIf="currentAlg">
+        <div *ngIf="currentAlg.ls === null; else drugBlock">
+          <h3 style="margin-bottom: 2rem;" *ngIf="currentAlg.q">{{ currentAlg.q }}</h3>
+          <ion-card (click)="nextAlg(i)" *ngFor="let item of currentAlg.childs; index as i;">
+            <ion-card-header>
+              <ion-card-subtitle>{{ item.r }}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </div>
+        <ng-template #drugBlock>
+          <h3 style="margin-bottom: 2rem;">Рекомендуемые лекарства</h3>
+          <ion-card (click)="openDrug(item)" *ngFor="let item of currentAlg.ls;">
+            <ion-card-header>
+              <ion-card-subtitle>{{ item.name }}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ng-template>
+      </div>
     </ion-slide>
   </ion-slides>
   <ion-fab *ngIf="gP.activeSlide > 0" horizontal="start" vertical="bottom" slot="fixed">
@@ -59,7 +76,7 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
   </ion-fab>
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab *ngIf="gP.activeSlide !== 2" horizontal="end" vertical="bottom" slot="fixed">
     <ion-button [disabled]="gP.addedSymptoms.length < 1" (click)="swipeNext()" color="primary">
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-button>

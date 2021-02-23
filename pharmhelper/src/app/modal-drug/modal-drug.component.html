@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> инструкция </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="drug-content" *ngIf="drug; else loadingBlock">
+    <div>
+      <h1>{{ drug.title }}</h1>
+      <span>{{ drug.ftg }}</span>
+    </div>
+    <div *ngFor="let item of instr;">
+      <h2>{{ item.heading }}</h2>
+      <p [innerHTML]="item.text"></p>
+    </div>
+  </div>
+  <ng-template #loadingBlock>
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+</ion-content>

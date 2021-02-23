@@ -48,6 +48,12 @@ export class TabsPage implements OnInit{
         globalProps.disData = data;
       }
     });
+
+    firestore.collection('drugs').valueChanges().subscribe(data => {
+      if (data) {
+        globalProps.drugsData = data;
+      }
+    })
   }
 
   ngOnInit() {
@@ -58,7 +64,7 @@ export class TabsPage implements OnInit{
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Загрузка данных',
-      duration: 0
+      duration: 2000
     });
     await this.loading.present();
 
